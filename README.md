@@ -18,6 +18,12 @@ Parcels are delivered in the city using both vans and bikers, from a wharehouse.
 3. delivery time coverage: parcels are delivered in unusual time slots (e.g: night)
 3. customer communication: customer is notified of change of plans, delivery time, ...
 
+### Usage
+#### Installation
+Use ```pip install -r requirements.txt``` to install all the dependencies.
+#### Execution
+To run the simulation, use the ```simulate``` command line tool.
+
 ### V0.1
 #### Assumptions
 1. Next day delivery / no time slot / no pickups
