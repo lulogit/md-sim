@@ -10,8 +10,9 @@ def car(env, name):
         trip_duration = max(0,np.random.normal(2,0.5))
         yield env.timeout(trip_duration)
 
-import simpy
-env = simpy.Environment()
-env.process(car(env,"Luca"))
-env.process(car(env,"Giulio"))
-env.run(until=100)
+if __name__=="__main__":
+    import simpy
+    env = simpy.Environment()
+    env.process(car(env,"Luca"))
+    env.process(car(env,"Giulio"))
+    env.run(until=100)
