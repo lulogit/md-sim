@@ -1,0 +1,8 @@
+{
+	"locations":{
+		"WHS": {"lat": 0, "long": 0},
+		"MH_001": {"lat": 5, "long": 5},
+		"DP_001": {"lat": 6, "long": 7}},
+	"distance": "squares",
+	"distance_correction_factor": 1.0
+}
