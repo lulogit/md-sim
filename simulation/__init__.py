@@ -1,5 +1,6 @@
 import simpy
 from .logging import StrLog
+from .city import City
 
 class Simulation:
 
@@ -7,7 +8,7 @@ class Simulation:
         self._SUPs = routes["SUPs"]
         self._TVs = routes["TVs"]
         self._PVs = routes["PVs"]
-        self._city = topo
+        self._city = City(topo["locations"])
         self._log = StrLog()
 
     def run(self, seed, time=None):
