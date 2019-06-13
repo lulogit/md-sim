@@ -13,8 +13,8 @@ Parcels are delivered in the city using both vans and bikers, from a wharehouse.
 * Vans (TV) deliver empty, folded, SUPs back to wharehouses.
 
 ### KPI
-1. delivery speed: how fast the parcel is delivered
-2. delivery precision: the parcel is correctly delivered in a requested time slot
+1. delivery speed: how fast the parcel is delivered 
+2. delivery precision: the parcel is correctly delivered in a requested time slot [*number of met slots over total delveries number*]
 3. delivery time coverage: parcels are delivered in unusual time slots (e.g: night)
 3. customer communication: customer is notified of change of plans, delivery time, ...
 
