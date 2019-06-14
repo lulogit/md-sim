@@ -3,6 +3,7 @@ import json
 import time
 from simulation import Simulation
 from simulation.config import defaults
+from simulation.logging import render
 
 def main(
         verbose: ("Print verbose messages","flag","vv"),
@@ -25,7 +26,7 @@ def main(
         sim = Simulation(routes, city, params)
         log = sim.run(seed, upto) if upto else sim.run(seed)
         if verbose:
-            print(log)
+            render(log)
 
 if __name__=="__main__":
     import plac; plac.call(main)
