@@ -2,6 +2,7 @@ import simpy
 from .logging import StrLog
 from .city import City
 from .transit_vehicles import TransitVehicle
+from .proximity_vehicles import ProximityVehicle
 from . import random_noise as noise
 
 class Simulation:
@@ -16,7 +17,15 @@ class Simulation:
             TransitVehicle(van_id,route)
             for van_id, route in routes["TVs"].items()]
         for tv in self._transit_vehicles:
-            self._env.process(tv.process(self._env, self._log, self._city))
+            self._env.process(tv.route_loop(self._env, self._log, self._city))
+
+        # init Proximity vehicles
+        self._proximity_vehicles = [
+            ProximityVehicle(biker_id,route)
+            for biker_id, route in routes["PVs"].items()]
+        for pv in self._proximity_vehicles:
+            self._env.process(pv.route_loop(self._env, self._log, self._city))
+
 
     def run(self, seed, time=None):
         '''

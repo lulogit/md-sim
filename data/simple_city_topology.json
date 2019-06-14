@@ -2,7 +2,8 @@
 	"locations":{
 		"WHS": {"lat": 0, "lon": 0},
 		"MH_001": {"lat": 500, "lon": 500},
-		"DP_001": {"lat": 600, "lon": 700}},
+		"DP_001": {"lat": 600, "lon": 700},
+		"SQUARE": {"lat": 600, "lon": 300}},
 	"distance": "squares",
 	"distance_correction_factor": 1.0
 }
