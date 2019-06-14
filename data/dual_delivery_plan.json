@@ -1,0 +1,36 @@
+{
+        "SUPs": {
+                "SUP_001": ["PC_001"],
+                "SUP_002": ["PC_002"]
+            },
+            "TVs": {
+                "TV_001": [
+                    {   
+                        "stop":"WHS", "drop":[], "take":["SUP_001","SUP_002"]},
+                    {   
+                        "stop": "MH_001", "drop":["SUP_001","SUP_002"], "take":[]},
+                    {
+                        "stop": "MH_001", "drop":[], "take":["SUP_001","SUP_002"]},
+                    {
+                        "stop": "WHS", "drop":["SUP_001"], "take":[]}
+                ]},
+	"PVs": {
+                "PV_001": [
+                    {
+                        "stop": "MH_001", "drop": [], "take": ["SUP_001"]},
+                    {
+                        "stop": "DP_001", "drop": ["PC_001"], "take": []},
+                    {
+                        "stop": "MH_001", "drop": ["SUP_001"], "take": []}
+                    ],
+		  "PV_002": [
+                    {
+                        "stop": "MH_001", "drop": [], "take": ["SUP_002"]},
+                    {
+                        "stop": "DP_002", "drop": ["PC_002"], "take": []},
+                    {
+                        "stop": "MH_001", "drop": ["SUP_002"], "take": []}
+                    ]
+                }
+
+            }

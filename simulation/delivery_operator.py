@@ -8,35 +8,43 @@ class DeliveryOperator:
         self._storage = set()
         self._model = None #Vehicle(speed=2.0)
 
-    def load(self, env, logger, units):
+    def load(self, sim, units, store):
         'the simpy process of loading some units'
-        logger.log(env.now, self.id, "loading %s" % str(units))
+        sim.logger.log(sim.env.now, self.id, "loading %s" % str(units))
+        if store in sim.micro_hubs:
+            for unit in units:
+                sim.logger.log(sim.env.now, self.id, "waiting for %s from %s" % (unit,store))
+                yield sim.micro_hubs[store].take_sup(unit)
         self._storage |= set(units)
-        yield env.timeout(len(units)*minutes(2))
-        logger.log(env.now, self.id, "finished loading %s" % str(units))
+        yield sim.env.timeout(len(units)*minutes(2))
+        sim.logger.log(sim.env.now, self.id, "finished loading %s" % str(units))
         return True
 
-    def drop(self, env, logger, units):
+    def drop(self, sim, units, store):
         'the simpy process of dropping some units'
+        if store in sim.micro_hubs:
+            for unit in units:
+                sim.logger.log(sim.env.now, self.id, "waiting for space from %s" % (store))
+                yield sim.micro_hubs[store].put_sup(unit)
         self._storage -= set(units)
-        logger.log(env.now, self.id, "delivering %s" % str(units))
-        yield env.timeout(len(units)*minutes(3))
-        logger.log(env.now, self.id, "delivered %s" % str(units))
+        sim.logger.log(sim.env.now, self.id, "delivering %s" % str(units))
+        yield sim.env.timeout(len(units)*minutes(3))
+        sim.logger.log(sim.env.now, self.id, "delivered %s" % str(units))
         return True
     
-    def drive_to(self, env, logger, stop, travel_time):
+    def drive_to(self, sim, stop, travel_time):
         'the simpy process of driving to a location'
-        logger.log(env.now, self.id, "going to %s" % stop)
-        yield env.timeout(travel_time)
+        sim.logger.log(sim.env.now, self.id, "going to %s" % stop)
+        yield sim.env.timeout(travel_time)
         self._location = stop
-        logger.log(env.now, self.id, "arrived at %s" % stop)
+        sim.logger.log(sim.env.now, self.id, "arrived at %s" % stop)
     
-    def route_loop(self, env, logger, city):
+    def route_loop(self, sim):
         'the simpy process of following a route'
         for order in self._route:
-            travel_time = city.travel_time(self._location,order["stop"],self._model) 
-            yield env.process(self.drive_to(env,logger, order["stop"], travel_time))
+            travel_time = sim.city.travel_time(self._location,order["stop"],self._model) 
+            yield sim.env.process(self.drive_to(sim, order["stop"], travel_time))
             if order["drop"]:
-                yield env.process(self.drop(env,logger, order["drop"]))
+                yield sim.env.process(self.drop(sim, order["drop"], order["stop"]))
             if order["take"]:
-                yield env.process(self.load(env,logger, order["take"]))
+                yield sim.env.process(self.load(sim, order["take"], order["stop"]))
