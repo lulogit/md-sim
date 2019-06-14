@@ -1,13 +1,18 @@
+# -*- coding: utf-8 -*-
 from .timing import as_clock
 
-def render(log):
+def emojify(s):
+    return s.replace("PV_","🚴").replace("TV_","🚚").replace("MH_","🛅").replace("WHS", "🏭").replace("PC_","📦").replace("SUP_","🛒")
+
+def render(log, emoji=False):
     from colorama import init, deinit, Fore, Back, Style
     init()
-    styles = [Fore.WHITE+bg+"%s"+Style.RESET_ALL for bg in [Back.RED, Back.BLUE]]
+    styles = [Fore.WHITE+bg+"%s"+Style.RESET_ALL for bg in [Back.RED, Back.BLUE,Back.GREEN]]
     objs = list({by for _t,by,_m in log})
     block = {o:s for o,s in zip(objs, styles)}
     for (time,by,msg) in log:
-        print("[%s|%s] %s" % (block[by] % by, as_clock(time), msg))
+        line = "[%s|%s] %s" % (block[by] % by, as_clock(time), msg)
+        print(emojify(line) if emoji else line)
     deinit()
 
 
