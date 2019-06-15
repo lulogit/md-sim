@@ -13,8 +13,8 @@ class MicroHub:
         'add a Smart Urban Pallet to the MH'
         return self._unfolded_storage.put(sup)
 
-    def take_sup(self, sup):
-        return self._unfolded_storage.get(lambda unit: unit==sup)
+    def take_sup(self, sups):
+        return self._unfolded_storage.get(lambda unit: unit in sups)
 
     def return_folded_sup(self,sup):
         yield self._folded_storage.put(sup)

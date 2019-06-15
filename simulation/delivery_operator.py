@@ -10,25 +10,35 @@ class DeliveryOperator:
 
     def load(self, sim, units, store):
         'the simpy process of loading some units'
-        sim.logger.log(sim.env.now, self.id, "loading %s" % str(units))
+        sim.logger.log(sim.env.now, self.id, "loading %s from %s" % (str(units),store))
         if store in sim.micro_hubs:
-            for unit in units:
-                sim.logger.log(sim.env.now, self.id, "waiting for %s from %s" % (unit,store))
-                yield sim.micro_hubs[store].take_sup(unit)
-        self._storage |= set(units)
-        yield sim.env.timeout(len(units)*minutes(2))
+            while units:
+                sim.logger.log(sim.env.now, self.id, "waiting for %s from %s" % (str(units),store))
+                taken_unit = yield sim.micro_hubs[store].take_sup(units)
+                sim.logger.log(sim.env.now, self.id, "moving %s" % (taken_unit))
+                self._storage.add(taken_unit)
+                yield sim.env.timeout(minutes(2))
+                sim.logger.log(sim.env.now, self.id, "moved %s" % (taken_unit))
+                units.remove(taken_unit)
+        else:
+            self._storage |= set(units)
+            yield sim.env.timeout(len(units)*minutes(2))
         sim.logger.log(sim.env.now, self.id, "finished loading %s" % str(units))
         return True
 
     def drop(self, sim, units, store):
         'the simpy process of dropping some units'
+        sim.logger.log(sim.env.now, self.id, "delivering %s" % str(units))
         if store in sim.micro_hubs:
             for unit in units:
                 sim.logger.log(sim.env.now, self.id, "waiting for space from %s" % (store))
                 yield sim.micro_hubs[store].put_sup(unit)
-        self._storage -= set(units)
-        sim.logger.log(sim.env.now, self.id, "delivering %s" % str(units))
-        yield sim.env.timeout(len(units)*minutes(3))
+                yield sim.env.timeout(minutes(3))
+                self._storage.remove(unit)
+                sim.logger.log(sim.env.now, self.id, "put %s into %s" % (unit,store))
+        else:
+            self._storage -= set(units)
+            yield sim.env.timeout(len(units)*minutes(3))
         sim.logger.log(sim.env.now, self.id, "delivered %s" % str(units))
         return True
     
