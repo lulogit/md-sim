@@ -1,0 +1,22 @@
+{
+	"transit_vehicles":{
+		"TV_001":{
+			"top_speed":50,
+			"speed": 35,
+			"weight_capacity": 2000,
+			"sup_capacity": 10 
+		}
+	},
+	"proximity_vehicles":{
+		"PV_001":{
+			"top_speed": 30,
+			"speed": 12,
+			"weight_capacity": 60,
+			"sup_capacity": 1 
+		}
+	},
+	"micro_hubs": {
+		"MH_001": {"unfolded_capacity": 10, "folded_capacity": 20}
+	},
+	"sups": {"tot": 1, "id_prefix": "SUP_"}
+}
