@@ -18,5 +18,5 @@
 	"micro_hubs": {
 		"MH_001": {"unfolded_capacity": 10, "folded_capacity": 20}
 	},
-	"sups": {"tot": 1, "id_prefix": "SUP_"}
+	"sups": {"tot": 10, "id_prefix": "SUP_", "dimensions": [40,40,40], "max_parcels": 10}
 }
