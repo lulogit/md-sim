@@ -8,6 +8,7 @@ from simulation.logging import render
 def main(
         verbose: ("Print verbose messages","flag","vv"),
         emoji: ("Print emoji log","flag","emj"),
+        Json: ("Print json log","flag","json"),
         upto: ("The simulation time in minutes","option","t",float,None,"TIME"), 
         conf: ("A .json file containing the parameters to run the simulation","option","c",str,None,"CONFIG"), 
         topo: "A .json file containing the topology of the city",
@@ -27,7 +28,7 @@ def main(
         sim = Simulation(routes, city, params)
         log = sim.run(seed, upto) if upto else sim.run(seed)
         if verbose:
-            render(log, emoji)
+            render(log, emoji, Json)
 
 if __name__=="__main__":
     import plac; plac.call(main)

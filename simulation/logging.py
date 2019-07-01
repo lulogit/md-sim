@@ -4,7 +4,11 @@ from .timing import as_clock
 def emojify(s):
     return s.replace("PV_","🚴").replace("TV_","🚚").replace("MH_","🛅").replace("WHS", "🏭").replace("PC_","📦").replace("SUP_","🛒")
 
-def render(log, emoji=False):
+def render(log, emoji=False, to_json=False):
+    if to_json:
+        import json
+        print(json.dumps([{"time": t,"by": v,"msg": m} for t,v,m in log]))
+        return 
     from colorama import init, deinit, Fore, Back, Style
     init()
     styles = [Fore.WHITE+bg+"%s"+Style.RESET_ALL for bg in [Back.RED, Back.BLUE,Back.GREEN]]
@@ -14,7 +18,6 @@ def render(log, emoji=False):
         line = "[%s|%s] %s" % (block[by] % by, as_clock(time), msg)
         print(emojify(line) if emoji else line)
     deinit()
-
 
 class StrLog:
 
