@@ -1,0 +1,25 @@
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+
+.truck {
+  margin: -5px -5px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #3887be;
+  pointer-events: none;
+}
+button {
+	position: absolute;
+	margin: 20px;
+}
+ 
+#pause::after {
+	content: 'Pause';
+}
+ 
+#pause.pause::after {
+	content: 'Play';
+	}
+
