@@ -28,7 +28,7 @@ class Simulation:
             self.env.process(pv.route_loop(self))
         
         # init micro hubs
-        self.micro_hubs = {mh_id:MicroHub(self, mh_id) for mh_id in ["MH_001"]}
+        self.micro_hubs = {mh_id: MicroHub(self, mh_id) for mh_id in ["MH_001"]}
 
     def run(self, seed, time=None):
         '''

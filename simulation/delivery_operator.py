@@ -1,7 +1,7 @@
 from .timing import minutes
 
 class DeliveryOperator:
-    def __init__(self, id, route, location="WHS"):
+    def __init__(self, id, route, location="WHS_001"):
         self.id = id
         self._location = location
         self._route = route

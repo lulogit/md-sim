@@ -9,13 +9,13 @@ def test_single_delivery():
             "TVs": {
                 "TV_001": [
                     {   
-                        "stop":"WHS", "drop":[], "take":["SUP_001"]},
+                        "stop":"WHS_001", "drop":[], "take":["SUP_001"]},
                     {   
                         "stop": "MH_001", "drop":["SUP_001"], "take":[]},
                     {
                         "stop": "MH_001", "drop":[], "take":["SUP_001"]},
                     {
-                        "stop": "WHS", "drop":["SUP_001"], "take":[]}
+                        "stop": "WHS_001", "drop":["SUP_001"], "take":[]}
                 ]
             },
             "PVs": {

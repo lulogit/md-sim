@@ -6,13 +6,13 @@
             "TVs": {
                 "TV_001": [
                     {   
-                        "stop":"WHS", "drop":[], "take":["SUP_001","SUP_002"]},
+                        "stop":"WHS_001", "drop":[], "take":["SUP_001","SUP_002"]},
                     {   
                         "stop": "MH_001", "drop":["SUP_001","SUP_002"], "take":[]},
                     {
                         "stop": "MH_001", "drop":[], "take":["SUP_001","SUP_002"]},
                     {
-                        "stop": "WHS", "drop":["SUP_001"], "take":[]}
+                        "stop": "WHS_001", "drop":["SUP_001"], "take":[]}
                 ]},
 	"PVs": {
                 "PV_001": [
